@@ -11,9 +11,7 @@ export default class App extends Component {
     bad: 0,
   };
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    const total = [];
-    total.push(good, neutral, bad);
+    const total = Object.values(this.state);
     return total.reduce((total, el) => total + el, 0);
   };
 
@@ -34,7 +32,10 @@ export default class App extends Component {
     const { good, neutral, bad } = this.state;
     return (
       <Section title="Please leave feedback">
-        <FeedbackOptions onLeaveFeedback={this.handleFeedback} />
+        <FeedbackOptions
+          options={this.state}
+          onLeaveFeedback={this.handleFeedback}
+        />
 
         <div>
           <h2>Statistics</h2>
